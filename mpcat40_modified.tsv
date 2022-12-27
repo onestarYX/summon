@@ -1,0 +1,9 @@
+mpcat40index	mpcat40	hex	wnsynsetkey	nyu40	skip	labels
+0	void	#ffffff		void		remove,void
+1	wall	#aec7e8	wall.n.01,baseboard.n.01,paneling.n.01	wall		wallpaper
+2	floor	#708090	floor.n.01,rug.n.01,mat.n.01,bath_mat.n.01,landing.n.01	floor,floor mat		
+3	chair	#98df8a	chair.n.01,beanbag.n.01	chair		
+4	sofa	#2ca02c	door.n.01,doorframe.n.01,doorway.n.01,doorknob.n.01,archway.n.01	door		garage door
+5	table	#ff7f0e	table.n.02,dressing.n.04	table,desk	counter.n.01	
+6	bed	#e377c2	picture.n.01,photograph.n.01,picture_frame.n.01	picture		
+7	stool	#637939	cabinet.n.01,cupboard.n.01	cabinet		

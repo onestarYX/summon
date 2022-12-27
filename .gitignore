@@ -1,0 +1,14 @@
+__pycache__/
+*~
+.idea/
+smplx_models/
+models/
+data/
+results/
+training/
+test_output/
+fitting_results
+fitting_results_prob
+*.zip
+*.pt
+
