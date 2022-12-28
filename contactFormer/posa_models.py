@@ -257,7 +257,7 @@ class Encoder(nn.Module):
             self.nv.append(nv)  # nv: [655, 164, 41]
             self.D.append(D)    # D: [(655, 2619),(164, 655),(41, 164)]
             self.spiral_indices.append(spiral_indices) # spiral_indices: (655->164->41, 9)
-        self.channels = (channels * np.ones(4)).astype(np.int).tolist() # [64, 64, 64, 64]
+        self.channels = (channels * np.ones(4)).astype(int).tolist() # [64, 64, 64, 64]
 
         self.en_spiral = nn.ModuleList()
         self.en_spiral.append(
@@ -298,7 +298,7 @@ class Decoder(nn.Module):
             nv, spiral_indices, _, _, _, _ = load_ds_us_param(ds_us_dir, level, seq_length, use_cuda)
             self.nv.append(nv)
             self.spiral_indices.append(spiral_indices)
-        self.channels = (channels * np.ones(4)).astype(np.int).tolist()
+        self.channels = (channels * np.ones(4)).astype(int).tolist()
 
         self.de_spiral = nn.ModuleList()
         self.de_spiral.append(GraphLin_block(3 + z_dim, z_dim // 2, normalization_mode, num_groups))
