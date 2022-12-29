@@ -73,15 +73,16 @@ The above command tests ContactFormer on the validation split of PROXD dataset.
 The first argument is location of the validation set folder. 
 `--model_name` is an arbitrary name you can set for disguishing the model you are testing. 
 It can also help you pinpoint the location of the test result
-since the result will be saved as a text file in the location `PATH_OF_OUTPUT/validation_results_<model_name>.txt`.
+since the result will be saved in a text file at the location `PATH_OF_OUTPUT/validation_results_<model_name>.txt`.
 
 You can also run add a `--save_video` flag to save the visualization of contact label prediction
 for some specific motion sequence. For example, you can run
 ```
-python test_contactformer.py ../data/proxd_valid/ --load_model ../training/contactformer/model_ckpt/best_model_recon_acc.pt --model_name contactformer --fix_ori --single_seq_name MPH112_00151_01 --save_video --output_dir ../test_output
+python test_contactformer.py ../data/proxd_valid/ --load_model ../training/contactformer/model_ckpt/best_model_recon_acc.pt --model_name contactformer --fix_ori --single_seq_name MPH112_00151_01 --save_video --output_dir PATH_OF_OUTPUT
 ```
 to save the visualization for predicted contact labels along with rendered body and scene meshes
-for each frame in the MPH112_00151_01 motion sequence.
+for each frame in the MPH112_00151_01 motion sequence. The rendered frames will be saved at
+`PATH_OF_OUTPUT/MPH112_00151_01/`.
 
 There are other parameters you can set to change the training scheme or the model architecture. Check
 `train_contactformer.py` and `test_contactformer.py` for more details.
