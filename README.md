@@ -55,16 +55,15 @@ in addition to the above command.
 ### Train and test ContactFormer
 You can train and test your own model. To train the model, still under `contactformer/`, you can run
 ```
-python train_contactformer.py --train_data_dir ../data/proxd_train --valid_data_dir ../data/proxd_valid --fix_ori --epochs 1000 --jump_step 8
+python train_contactformer.py --train_data_dir ../data/proxd_train --valid_data_dir ../data/proxd_valid --fix_ori --epochs 1000 --out_dir ../training --experiment default_exp
 ```
 Replace the train and validation dataset paths after `--train_data_dir` and `--valid_data_dir`
 with the path of your downloaded data. `--fix_ori` normalizes the orientation of
 all motion sequences in the dataset: for each motion sequence, rotate all poses in that sequence
 so that the first pose faces towards some canonical orientation (e.g. pointing out of the screen)
-and the motion sequence continues with the rotated first pose. `--jump_step` is the size of 
-frame skipping when the model reads each motion sequence (i.e. for every `jump_step` poses
-in a sequence, we select one pose as the input). To balance compute limit and performance, we found
-8 is a good staring point.
+and the motion sequence continues with the rotated first pose. `--experiment` specifies the name
+of the current experiment. Running the above command, all model checkpoints and 
+training logs will be saved at `<path_to_project_root>/training/default_exp`.
 
 To test a model checkpoint, you can run
 ```
@@ -74,7 +73,7 @@ The above command tests ContactFormer on the validation split of PROXD dataset.
 The first argument is location of the validation set folder. 
 `--model_name` is an arbitrary name you can set for disguishing the model you are testing. 
 It can also help you pinpoint the location of the test result
-since the result will be saved as a text file in the location `PATH_OF_OUTPUT/validation_results_{model_name}.txt`.
+since the result will be saved as a text file in the location `PATH_OF_OUTPUT/validation_results_<model_name>.txt`.
 
 You can also run add a `--save_video` flag to save the visualization of contact label prediction
 for some specific motion sequence. For example, you can run
