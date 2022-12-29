@@ -82,7 +82,7 @@ python test_contactformer.py ../data/proxd_valid/ --load_model ../training/conta
 ```
 to save the visualization for predicted contact labels along with rendered body and scene meshes
 for each frame in the MPH112_00151_01 motion sequence. The rendered frames will be saved at
-`PATH_OF_OUTPUT/MPH112_00151_01/`.
+`PATH_OF_OUTPUT/MPH112_00151_01/`. **Note that you need a screen to run this command.**
 
 There are other parameters you can set to change the training scheme or the model architecture. Check
 `train_contactformer.py` and `test_contactformer.py` for more details.
@@ -122,7 +122,8 @@ using the same example as mentioned above, you can run
 ```
 python vis_fitting_results.py --fitting_results_path fitting_results/MPH11_00150_01 --vertices_path data/proxd_valid/vertices/MPH11_00150_01_verts.npy
 ```
-The script will save rendered frames in `fitting_results/MPH11_00150_01/rendering`
+The script will save rendered frames in `fitting_results/MPH11_00150_01/rendering`. 
+**Note that you need a screen to run this command.**
 
 Note that the candidate objects for fitting will be from the `3D_Future` directory in this repository, which is a subset of the [3D Future dataset](https://tianchi.aliyun.com/specials/promotion/alibaba-3d-future). You can modify the candidate objects by changing the contents of the `3D_Future` directory.
 
