@@ -118,6 +118,7 @@ all frames. The estimation will be saved to accelerate future inference.
 if you used `--save_probability` flag when generating the contact prediction), 
 you can need to `--input_probability` flag at the end.
 
+### Visualization
 If you want to visualize the fitting result (i.e. recovered objects along with the human motion),
 using the same example as mentioned above, you can run
 ```
@@ -129,10 +130,35 @@ which doesn't have a display service, you can still load the saved objects and h
 use other approaches to visualize them. To get the human meshes, you can still run the above
 command and wait until the program automatically exits. The script will save the human meshes
 of your specified motion sequence in `fitting_results/<sequence name>/human/mesh`.
-Best fitting objects are stored in `fitting_results/<object category>/0/<best_obj_id>/opt_best.obj`.
-As mentioned before, you can get `<best_obj_id>` in `fitting_results/<object category>/0/best_obj_id.json`.
+Best fitting objects are stored in `fitting_results/<sequence name>/fit_best_obj/<object category>/<object index>/<best_obj_id>/opt_best.obj`.
+As mentioned before, you can get `<best_obj_id>` in `fitting_results/<sequence name>/fit_best_obj/<object category>/<object index>/best_obj_id.json`.
 
 Note that the candidate objects for fitting will be from the `3D_Future` directory in this repository, which is a subset of the [3D Future dataset](https://tianchi.aliyun.com/specials/promotion/alibaba-3d-future). You can modify the candidate objects by changing the contents of the `3D_Future` directory.
+
+### Scene Completion
+Our work allow you to further populate the scene with non-contact objects. To achieve this, we adopted
+a in-door scene generation model called [ATISS](https://nv-tlabs.github.io/ATISS/). To use it, please
+first install additional dependencies required for ATISS:
+```
+pip install -r atiss/requirements.txt
+conda install torchvision -c pytorch
+```
+Then, please download our pretrained ATISS model checkpoint [here](https://drive.google.com/file/d/1u5joiXN9M5ZtNc9mqdDvJr2BeWPdtanz/view?usp=share_link).
+To get the probability distribution of the class of the next object to be placed in the scene,
+please run 
+```
+python get_next_obj_class.py --fitting_results_path <fitting_results_path> --path_to_model <path_to_atiss_ckpt>
+```
+Here `fitting_results_path` should be the object fitting results you just runned for some sequence.
+In the above example, this path should be `fitting_results/MPH11_00150_01`. This script will save
+the class distribution for the next potential objects in `<fitting_results_path>/atiss_out.npy`.
+
+To Sifan:
+1. If we continue with our format of storing objects (i.e. store objects in `fit_best_obj` ),
+we can continue to run `get_next_obj_class.py` to get the next class distribution, and we
+can still run `vis_fitting_results.py` to visualize results after adding non-contact objects.
+2. TODO: sample and place non-contact objects (probably 1~2 iterations)
+3. TODO[optional]: maybe combine getting probability and placing objects in  one script.
 
 ## Citation
 If you find this work helpful, please consider citing:
