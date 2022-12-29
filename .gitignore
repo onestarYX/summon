@@ -7,8 +7,8 @@ data/
 results/
 training/
 test_output/
-fitting_results
-fitting_results_prob
+fitting_results/
+fitting_results_prob/
 *.zip
 *.pt
-
+3D_Future/

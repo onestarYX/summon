@@ -6,11 +6,15 @@ This is the official repository for the paper: **Scene Synthesis from Human Moti
 ## Installation
 ### Environment
 We highly recommand you to create a Conda environment to better manage all the Python packages needed.
+```
+conda create -n summon python=3.8
+conda activate summon
+```
 After you create the environment, please install pytorch with CUDA. You can do it by running
 ```
 conda install pytorch pytorch-cuda=11.6 -c pytorch -c nvidia
 ```
-The other dependencies need for this work is listed in the requirements.txt. 
+The other dependencies needed for this work is listed in the requirements.txt. 
 We recommend you to use pip to install them: 
 ```
 pip install -r requirements.txt
@@ -26,6 +30,9 @@ We provide a pretrained [model checkpoint](https://drive.google.com/file/d/1JZsR
 for ContactFormer. Please download and unzip it in the project root directory.
 After doing that, you will get a `training/` folder with two subfolders: 
 `contactformer/` and `posa/`.
+
+We also provide a small subset of 3D_Future for you to test. Please use this [link](https://drive.google.com/file/d/10teWFzqB7Z_X-Om5rmCdbN_UVUEEP9_9/view?usp=share_link)
+to download and unzip it at the root directory.
 
 ## Contact Prediction
 To generate contact label predictions for all motion sequences stored in the 
@@ -100,12 +107,15 @@ python fit_best_obj.py --sequence_name MPH11_00150_01 --vertices_path data/proxd
 ```
 Fitting results will be saved under `fitting_results/MPH11_00150_01/fit_best_obj`.
 
-Note that if it is the first time you run this optimization for some human motion sequence,
+There are several things noteworthy here:
+- If it is the first time you run this optimization for some human motion sequence,
 the script can take several minutes since it needs to estimate the SDF for human meshes in
 all frames. The estimation will be saved to accelerate future inference.
-
-If you want to use contact probability for each object category as input, 
-you can attach `--input_probability` flag at the end.
+- If you want to run this script on a server/cluster without a screen, please add
+`os.environ['PYOPENGL_PLATFORM'] = 'egl'` in `fit_best_obj.py` after the line `import os`.
+- If you want to use contact probability for each object category as input (i.e.
+if you used `--save_probability` flag when generating the contact prediction), 
+you can need to `--input_probability` flag at the end.
 
 If you want to visualize the fitting result (i.e. recovered objects along with the human motion),
 using the same example as mentioned above, you can run
