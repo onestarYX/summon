@@ -2,6 +2,7 @@
 ![representative_img](https://user-images.githubusercontent.com/25496380/189529534-dcdd01f5-8422-410a-8de5-6a6404f81d37.png)
 
 This is the official repository for the paper: **Scene Synthesis from Human Motion** [[Paper]()]
+[[Project page](https://lijiaman.github.io/projects/summon/)]
 
 ## Installation
 ### Environment
