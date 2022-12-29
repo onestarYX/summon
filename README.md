@@ -96,7 +96,7 @@ python fit_best_obj.py --sequence_name <sequence_name> --vertices_path <path_to_
 ```
 The fitting results for **all candidate objects** will be saved under 
 `<output_directory>/<sequence_name>/fit_best_obj`. 
-For each predicted object category, there is a json file called "best_obj_id.json" 
+For each predicted object category, there is a json file called `best_obj_id.json` 
 which stores the object ID that achieves the lowest optimization loss.
 
 For example, suppose you have human vertices for motion sequence MPH11_00150_01 saved at
@@ -123,7 +123,13 @@ using the same example as mentioned above, you can run
 python vis_fitting_results.py --fitting_results_path fitting_results/MPH11_00150_01 --vertices_path data/proxd_valid/vertices/MPH11_00150_01_verts.npy
 ```
 The script will save rendered frames in `fitting_results/MPH11_00150_01/rendering`. 
-**Note that you need a screen to run this command.**
+**Note that you need a screen to run this command.** In case you are testing the project on a server
+which doesn't have a display service, you can still load the saved objects and human meshes and
+use other approaches to visualize them. To get the human meshes, you can still run the above
+command and wait until the program automatically exits. The script will save the human meshes
+of your specified motion sequence in `fitting_results/<sequence name>/human/mesh`.
+Best fitting objects are stored in `fitting_results/<object category>/0/<best_obj_id>/opt_best.obj`.
+As mentioned before, you can get `<best_obj_id>` in `fitting_results/<object category>/0/best_obj_id.json`.
 
 Note that the candidate objects for fitting will be from the `3D_Future` directory in this repository, which is a subset of the [3D Future dataset](https://tianchi.aliyun.com/specials/promotion/alibaba-3d-future). You can modify the candidate objects by changing the contents of the `3D_Future` directory.
 
