@@ -32,7 +32,7 @@ for ContactFormer. Please download and unzip it in the project root directory.
 After doing that, you will get a `training/` folder with two subfolders: 
 `contactformer/` and `posa/`.
 
-We also provide a small subset of 3D_Future for you to test. Please use this [link](https://drive.google.com/file/d/10teWFzqB7Z_X-Om5rmCdbN_UVUEEP9_9/view?usp=share_link)
+We also provide a small subset of 3D_Future for you to test. Please use this [link](https://drive.google.com/file/d/1SryC2uRMoOYQ-qOEiZYB0NVccDRNEsB6/view?usp=share_link)
 to download and unzip it at the root directory.
 
 ## Contact Prediction
@@ -144,21 +144,19 @@ pip install -r atiss/requirements.txt
 conda install torchvision -c pytorch
 ```
 Then, please download our pretrained ATISS model checkpoint [here](https://drive.google.com/file/d/1u5joiXN9M5ZtNc9mqdDvJr2BeWPdtanz/view?usp=share_link).
-To get the probability distribution of the class of the next object to be placed in the scene,
-please run 
+Then, you can do scene completion by running
 ```
-python get_next_obj_class.py --fitting_results_path <fitting_results_path> --path_to_model <path_to_atiss_ckpt>
+python scene_completion.py --fitting_results_path <fitting_results_path> --path_to_model <path_to_atiss_ckpt> --obj_dataset_path 3D_Future/models --spare_length 1 --num_iter 3
 ```
-Here `fitting_results_path` should be the object fitting results you just runned for some sequence.
-In the above example, this path should be `fitting_results/MPH11_00150_01`. This script will save
-the class distribution for the next potential objects in `<fitting_results_path>/atiss_out.npy`.
+Here `fitting_results_path` should be the object fitting results you just ran for some sequence.
+In the above example, this path should be `fitting_results/MPH11_00150_01`. `path_to_model` should be
+the path to the ATISS model checkpoint. `spare_length` is the extra size you want to add to the scene/room.
+Setting it to 0 will make the scene/room exactly bound existed objects. `num_iter` is the number
+of non-contact objects you want to add to the scene.
 
-To Sifan:
-1. If we continue with our format of storing objects (i.e. store objects in `fit_best_obj` ),
-we can continue to run `get_next_obj_class.py` to get the next class distribution, and we
-can still run `vis_fitting_results.py` to visualize results after adding non-contact objects.
-2. TODO: sample and place non-contact objects (probably 1~2 iterations)
-3. TODO[optional]: maybe combine getting probability and placing objects in  one script.
+After completing the scene, you can visualize the results using exactly the same visualization script
+provided in the previous section.
+
 
 ## Citation
 If you find this work helpful, please consider citing:

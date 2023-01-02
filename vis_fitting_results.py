@@ -34,15 +34,15 @@ if __name__ == '__main__':
 
     res_dir = input_dir / 'fit_best_obj'
     obj_mesh_list = []
-    for obj_dir in res_dir.iterdir():
-        obj_dir = obj_dir / '0'
-        with open(str(obj_dir / 'best_obj_id.json'), "r") as f:
-            best_obj_json = json.load(f)
-        best_obj_id = best_obj_json['best_obj_id']
-        best_obj_path = obj_dir / best_obj_id / 'opt_best.obj'
-        obj_mesh = o3d.io.read_triangle_mesh(str(best_obj_path))
-        obj_mesh.compute_vertex_normals()
-        obj_mesh_list.append(obj_mesh)
+    for obj_class_dir in res_dir.iterdir():
+        for obj_dir in obj_class_dir.iterdir():
+            with open(str(obj_dir / 'best_obj_id.json'), "r") as f:
+                best_obj_json = json.load(f)
+            best_obj_id = best_obj_json['best_obj_id']
+            best_obj_path = obj_dir / best_obj_id / 'opt_best.obj'
+            obj_mesh = o3d.io.read_triangle_mesh(str(best_obj_path))
+            obj_mesh.compute_vertex_normals()
+            obj_mesh_list.append(obj_mesh)
 
     frame = 0
     for _ in tqdm(human_mesh_dir.iterdir()):
