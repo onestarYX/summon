@@ -125,7 +125,6 @@ if __name__ == '__main__':
     checkpoint = torch.load(ckpt_path)
     model.load_state_dict(checkpoint['model_state_dict'])
 
-
     for seq_name in seq_name_list:
         if save_video or visualize:
             save_seq_dir = os.path.join(output_dir, seq_name)
@@ -281,3 +280,4 @@ if __name__ == '__main__':
         f.write("IOU for semantic labels: {:.4f}".format(list_mean(iou_s_list)) + '\n')
         f.write("F1-score for semantic labels: {:.4f}".format(list_mean(f1_s_list)) + '\n')
         f.write("Reconstructed Semantics Accuracy: {:.4f}".format(list_mean(recon_semantics_acc_list)) + '\n')
+
