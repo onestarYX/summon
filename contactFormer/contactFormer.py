@@ -16,7 +16,7 @@ The ContactFormer and its variants presented in the paper
 """
 class ContactFormer(nn.Module):
     def __init__(self, seg_len, encoder_mode, decoder_mode, n_layer=6, n_head=8, f_vert=64, dim_ff=512,
-                 d_hid=512, mesh_ds_dir="../data/mesh_ds", posa_path=None, **kwargs):
+                 d_hid=512, mesh_ds_dir="../mesh_ds", posa_path=None, **kwargs):
         super(ContactFormer, self).__init__()
         self.seg_len = seg_len
         self.encoder_mode = encoder_mode
@@ -228,7 +228,7 @@ class POSA_temp_transformer(nn.Module):
         return out, mu, logvar
 
 class GNNEncoder(nn.Module):
-    def __init__(self, seg_len, h_dim=512, z_dim=256, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, seg_len, h_dim=512, z_dim=256, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  encoder_mode=0, n_layer=6, n_head=8, add_virtual_node=False, **kwargs):
         super(GNNEncoder, self).__init__()
@@ -287,7 +287,7 @@ class GNNEncoder(nn.Module):
 
 
 class GNNDecoder(nn.Module):
-    def __init__(self, seg_len, z_dim=256, num_hidden_layers=3, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, seg_len, z_dim=256, num_hidden_layers=3, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  decoder_mode=0, n_layer=6, n_head=8, add_virtual_node=False, **kwargs):
         super(GNNDecoder, self).__init__()
@@ -402,7 +402,7 @@ class POSA_temp_transformer_seq(nn.Module):
 
 
 class Encoder_seq(nn.Module):
-    def __init__(self, seg_len, prev_feat_dim=64, h_dim=512, z_dim=256, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, seg_len, prev_feat_dim=64, h_dim=512, z_dim=256, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  encoder_mode=0, n_layer=6, n_head=8, add_virtual_node=False, **kwargs):
         super(Encoder_seq, self).__init__()
@@ -478,7 +478,7 @@ class Encoder_seq(nn.Module):
 
 
 class Decoder_seq(nn.Module):
-    def __init__(self, seg_len, z_dim=256, prev_feat_dim=64, num_hidden_layers=3, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, seg_len, z_dim=256, prev_feat_dim=64, num_hidden_layers=3, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  decoder_mode=0, n_layer=6, n_head=8, add_virtual_node=False, **kwargs):
         super(Decoder_seq, self).__init__()
@@ -612,7 +612,7 @@ class POSA_temp_transformer_var(nn.Module):
 
 
 class Encoder_var(nn.Module):
-    def __init__(self, max_frame, prev_feat_dim=64, h_dim=512, z_dim=256, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, max_frame, prev_feat_dim=64, h_dim=512, z_dim=256, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  encoder_mode=0, n_layer=6, n_head=8, add_virtual_node=False, **kwargs):
         super(Encoder_var, self).__init__()
@@ -664,7 +664,7 @@ class Encoder_var(nn.Module):
 
 
 class Decoder_var(nn.Module):
-    def __init__(self, max_frame, z_dim=256, prev_feat_dim=64, num_hidden_layers=2, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, max_frame, z_dim=256, prev_feat_dim=64, num_hidden_layers=2, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  decoder_mode=0, n_layer=6, n_head=8, add_virtual_node=False, **kwargs):
         super(Decoder_var, self).__init__()
@@ -741,7 +741,7 @@ class POSA_temp_transformer_bidir(nn.Module):
 
 
 class Encoder_bidir(nn.Module):
-    def __init__(self, seg_len, h_dim=512, z_dim=256, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, seg_len, h_dim=512, z_dim=256, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  encoder_mode=1, n_layer=3, n_head=4, dim_ff=256, add_virtual_node=False, **kwargs):
         super(Encoder_bidir, self).__init__()
@@ -853,7 +853,7 @@ class Encoder_bidir(nn.Module):
 
 
 class Decoder_bidir(nn.Module):
-    def __init__(self, seg_len, z_dim=256, h_dim=512, num_hidden_layers=3, channels=64, ds_us_dir='../data/mesh_ds',
+    def __init__(self, seg_len, z_dim=256, h_dim=512, num_hidden_layers=3, channels=64, ds_us_dir='../mesh_ds',
                  normalization_mode='group_norm', num_groups=8, seq_length=9, no_obj_classes=8, use_cuda=True,
                  decoder_mode=0, n_layer=6, n_head=8, dim_ff=256, add_virtual_node=False, **kwargs):
         super(Decoder_bidir, self).__init__()
@@ -955,3 +955,4 @@ class Decoder_bidir(nn.Module):
             x = x.unsqueeze(2).expand(-1, -1, nv, -1)  # (bs, seg_len, nv, h_dim)
             x = self.fin_linear(torch.cat((verts_feat, x), dim=-1))
             return x
+
