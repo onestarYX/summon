@@ -146,7 +146,7 @@ conda install torchvision -c pytorch
 Then, please download our pretrained ATISS model checkpoint [here](https://drive.google.com/file/d/1u5joiXN9M5ZtNc9mqdDvJr2BeWPdtanz/view?usp=share_link).
 Then, you can do scene completion by running
 ```
-python scene_completion.py --fitting_results_path <fitting_results_path> --path_to_model <path_to_atiss_ckpt> --obj_dataset_path 3D_Future/models --spare_length 1 --num_iter 3
+python scene_completion.py --fitting_results_path <fitting_results_path> --path_to_model <path_to_atiss_ckpt> --obj_dataset_path 3D_Future/models --spare_length 1 --num_iter 2
 ```
 Here `fitting_results_path` should be the object fitting results you just ran for some sequence.
 In the above example, this path should be `fitting_results/MPH11_00150_01`. `path_to_model` should be
